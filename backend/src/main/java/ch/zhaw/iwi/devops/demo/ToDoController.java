@@ -81,7 +81,7 @@ public class ToDoController {
         this.todos.put(id, todo);
     }
 
-    @DeleteMapping("/services/todo/{key}")
+    @DeleteMapping("/services/todo/{id}")
     public ToDo deleteTodo(@PathVariable Integer id) {
         return this.todos.remove(id);
     }

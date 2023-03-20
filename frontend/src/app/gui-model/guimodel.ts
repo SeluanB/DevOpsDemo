@@ -87,6 +87,24 @@ export class GuiModel {
                         }
                     ]
                 },
+                {
+                    "id": "ErledigteToDoForm",
+                    "title": { default: "Erledigte ToDo" },
+                    "url": "/donetodo",
+                    "formFieldList": [
+                        {
+                            "width": 2
+                        },
+                        {
+                            "type": "cancelButton",
+                            "name": "Cancel"
+                        },
+                        {
+                            "type": "okButton",
+                            "name": "Ok"
+                        }
+                    ]
+                },
             ],
             "pageList": [
                 {
@@ -125,6 +143,16 @@ export class GuiModel {
                                 "form" : "ToDoForm"
                             }
                         },
+                        {
+                            "type": "newButton",
+                            "name": { default: "Erledigte To Do" },
+                            "icon": "fa-check",
+                            "color": "blue",
+                            "width": 2,
+                            "form" : {
+                                "form" : "ErledigteToDoForm"
+                            }
+                            },
                         {
                             "type": "list",
                             "name": "ToDo",
