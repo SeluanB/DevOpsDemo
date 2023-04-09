@@ -22,7 +22,7 @@ class OhceTest {
 
     @Test
     void reverseUnicodeCharactersTest() {
-        assertEquals("ćiriličan i ćiriličar", ohce.reverse("račilirić i nacilirić"));
+        assertEquals("ćiriličan i ćiriličar", ohce.reverse("račilirić i načilirić"));
     }
 
     @Test
@@ -37,13 +37,13 @@ class OhceTest {
 
     @Test
     void isPalindromeSpecialCharactersTest() {
-        assertTrue(ohce.isPalindrome("(*&^%$#@!)!@#$%^&*)"));
+        assertTrue(ohce.isPalindrome("*&^%$#@!@#$%^&*"));
         assertFalse(ohce.isPalindrome("(*&^%$#@!)!@#$%^&)"));
     }
 
     @Test
     void isPalindromeUnicodeCharactersTest() {
-        assertTrue(ohce.isPalindrome("аibоhiоbiа"));
+        assertTrue(ohce.isPalindrome("аibоhihоbiа"));
         assertFalse(ohce.isPalindrome("ćiriličan i ćiriličar"));
     }
 

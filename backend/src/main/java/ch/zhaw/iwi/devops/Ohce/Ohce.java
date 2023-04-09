@@ -1,5 +1,6 @@
 package ch.zhaw.iwi.devops.Ohce;
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
 public class Ohce {
     private String name;
@@ -32,4 +33,47 @@ public class Ohce {
     public int getCurrentHour() {
         return LocalDateTime.now().getHour();
     }
+
+    public void processInput() {
+        Scanner scanner = new Scanner(System.in);
+        String input;
+        System.out.println(greet());
+
+        while (scanner.hasNextLine()) {
+            input = scanner.nextLine();
+            if (isStopCommand(input)) {
+                System.out.println("Adios " + name);
+                break;
+            } else {
+                respond(input);
+            }
+        }
+
+        scanner.close();
+    }
+
+    private boolean isStopCommand(String input) {
+        return "Stop!".equalsIgnoreCase(input);
+    }
+
+    private void respond(String input) {
+        String reversed = reverse(input);
+        System.out.println(reversed);
+
+        if (isPalindrome(input)) {
+            System.out.println("¡Bonita palabra!");
+        }
+    }
+
+    public static void main(String[] args) {
+        if (args.length < 1) {
+            System.out.println("Please provide your name as an argument.");
+            return;
+        }
+
+        String name = args[0];
+        Ohce ohce = new Ohce(name);
+        ohce.processInput();
+    }
 }
+
