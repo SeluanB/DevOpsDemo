@@ -35,10 +35,10 @@ public class Ohce {
     }
 
     public void processInput() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = getScanner();
         String input;
         System.out.println(greet());
-
+    
         while (scanner.hasNextLine()) {
             input = scanner.nextLine();
             if (isStopCommand(input)) {
@@ -48,21 +48,25 @@ public class Ohce {
                 respond(input);
             }
         }
-
+    
         scanner.close();
     }
 
-    private boolean isStopCommand(String input) {
+    public boolean isStopCommand(String input) {
         return "Stop!".equalsIgnoreCase(input);
     }
 
-    private void respond(String input) {
+    public void respond(String input) {
         String reversed = reverse(input);
         System.out.println(reversed);
 
         if (isPalindrome(input)) {
             System.out.println("¡Bonita palabra!");
         }
+    }
+
+    public Scanner getScanner() {
+        return new Scanner(System.in);
     }
 
     public static void main(String[] args) {

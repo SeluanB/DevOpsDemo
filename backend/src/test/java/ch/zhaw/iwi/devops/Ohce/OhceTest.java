@@ -1,6 +1,9 @@
 package ch.zhaw.iwi.devops.Ohce;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 class OhceTest {
     private String name = "Test";
@@ -87,6 +90,45 @@ void greetUnicodeNameTest() {
     } else {
         assertEquals("¡Buenas tardes Иван!", greeting);
     }
+}
+
+@Test
+void isStopCommandTest() {
+    assertTrue(ohce.isStopCommand("Stop!"));
+    assertTrue(ohce.isStopCommand("stop!"));
+    assertFalse(ohce.isStopCommand("stop"));
+    assertFalse(ohce.isStopCommand("!Stop"));
+}
+
+@Test
+void respondTest() {
+    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    System.setOut(new PrintStream(outContent));
+
+    ohce.respond("hannah");
+    assertEquals("hannah\n¡Bonita palabra!\n", outContent.toString());
+
+    outContent.reset();
+    ohce.respond("hello");
+    assertEquals("olleh\n", outContent.toString());
+
+    System.setOut(System.out);
+}
+
+@Test
+void processInputTest() {
+    ByteArrayInputStream inContent = new ByteArrayInputStream("hello\nhannah\nStop!".getBytes());
+    System.setIn(inContent);
+
+    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    System.setOut(new PrintStream(outContent));
+
+    ohce.processInput();
+    String greeting = ohce.greet();
+    assertEquals(greeting + "\nolleh\nhannah\n¡Bonita palabra!\nAdios Test\n", outContent.toString());
+
+    System.setIn(System.in);
+    System.setOut(System.out);
 }
 }
 
